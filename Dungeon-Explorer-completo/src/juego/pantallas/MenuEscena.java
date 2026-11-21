@@ -18,8 +18,8 @@ public class MenuEscena extends Escena {
     @Override public void dibujar(Graphics2D g) {
         int w=getContexto().getAncho(), h=getContexto().getAlto();
         fondo(g,w,h);
-        Texto.centrado(g,"DUNGEON EXPLORER",w/2,190,48,new Color(255,226,153));
-        Texto.centrado(g,"La gema perdida de la mazmorra",w/2,232,20,new Color(218,205,235));
+        Texto.centrado(g,"EXPLORA",w/2,190,48,new Color(255,226,153));
+        Texto.centrado(g,"MAMÁ SALCHICHA",w/2,232,20,new Color(218,205,235));
         dibujarBoton(g,jugar,"COMENZAR",new Color(126,82,177)); dibujarBoton(g,salir,"SALIR",new Color(76,65,93));
         Texto.centrado(g,"Flechas / WASD: mover     E: interactuar     ESC: menú",w/2,550,15,new Color(202,194,216));
         Texto.centrado(g,"Récord: "+Partida.leerRecord(),w/2,585,16,new Color(255,220,130));
