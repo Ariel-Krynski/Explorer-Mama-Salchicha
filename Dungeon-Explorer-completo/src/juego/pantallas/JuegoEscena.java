@@ -1,4 +1,3 @@
-
 package juego.pantallas;
 
 import java.awt.*;
@@ -41,7 +40,8 @@ public class JuegoEscena extends Escena {
             return;
         }
 
-        if (getEntrada().fuePresionada(KeyEvent.VK_BACK_SPACE)) {
+        // Volver a la cámara anterior al presionar Z.
+        if (getEntrada().fuePresionada(KeyEvent.VK_Z)) {
             Integer anterior=ServiciosMazmorra.obtener().deshacer();
 
             if(anterior!=null) {
@@ -52,6 +52,15 @@ public class JuegoEscena extends Escena {
                 aviso="Volviste a la sala anterior.";
                 tiempoAviso=2;
             }
+        }
+
+        // Muestra el recorrido DFS al presionar F.
+        if (getEntrada().fuePresionada(KeyEvent.VK_F)) {
+            Lista<Integer> recorrido =
+                    ServiciosMazmorra.obtener().recorridoDfs(partida.getHabitacion());
+
+            aviso="DFS: " + formatearRecorrido(recorrido);
+            tiempoAviso=5;
         }
 
         if (getEntrada().fuePresionada(KeyEvent.VK_P)) pausa=!pausa;
@@ -222,6 +231,18 @@ public class JuegoEscena extends Escena {
         for(int i=0;i<ruta.tamanio();i++) {
             if(i>0) texto+=" > ";
             texto+="Cámara "+(ruta.obtener(i)+1);
+        }
+
+        return texto;
+    }
+
+    // Convierte el recorrido DFS en números de cámaras.
+    private String formatearRecorrido(Lista<Integer> recorrido) {
+        String texto="";
+
+        for(int i=0;i<recorrido.tamanio();i++) {
+            if(i>0) texto+=" -> ";
+            texto+="Cámara "+(recorrido.obtener(i)+1);
         }
 
         return texto;
@@ -576,7 +597,7 @@ public class JuegoEscena extends Escena {
         // Muestra la ruta calculada mediante Dijkstra.
         Texto.izquierda(g,rutaSantuario,38,75,12,new Color(218,205,239));
 
-        Texto.centrado(g,"WASD / FLECHAS: mover     E: interactuar     BACKSPACE: volver     1-4: Markov k     P: pausa     ESC: menú",480,615,13,new Color(213,204,226));
+        Texto.centrado(g,"WASD / FLECHAS: mover     E: interactuar     Z: volver     F: recorrido DFS     1-4: Markov k     P: pausa     ESC: menú",480,615,13,new Color(213,204,226));
 
         if(tiempoAviso>0) {
             g.setColor(new Color(20,15,32,210));
