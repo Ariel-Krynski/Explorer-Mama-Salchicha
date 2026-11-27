@@ -1,2 +1,7 @@
 package juego.reglas;
-public interface Recompensa{int otorgar();}
+
+// Es una interfaz que marca qué objetos dan una recompensa y obliga a que
+// implementen otorgar() para devolver un valor numérico (int).
+public interface Recompensa {
+    int otorgar();
+}
